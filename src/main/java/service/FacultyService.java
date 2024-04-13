@@ -3,10 +3,11 @@ package service;
 import exceptions.RecordNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import model.Faculty;
+import org.springframework.stereotype.Service;
 import repository.FacultyRepository;
 
 import java.util.Collection;
-
+@Service
 public class FacultyService {
     private final FacultyRepository repository;
 
@@ -31,15 +32,17 @@ public class FacultyService {
                 })
                 .orElse(false);
     }
-
-
     public Faculty update(Faculty faculty) {
         return repository.findById(faculty.getId())
                 .map(entity -> repository.save(faculty))
                 .orElse(null);
     }
 
-    public Collection<Faculty> getByColor(String color) {
-        return repository.findAllByColor(color);
+    public Collection<Faculty> getByColorAndName(String color, String name) {
+        return repository.findAllByColorOrNameIgnoreCase(color, name);
+    }
+
+    public Collection<Faculty> getAll() {
+        return repository.findAll();
     }
 }

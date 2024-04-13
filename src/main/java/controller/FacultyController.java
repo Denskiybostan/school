@@ -1,6 +1,8 @@
 package controller;
 
 import model.Faculty;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import service.FacultyService;
 
@@ -31,8 +33,11 @@ public class FacultyController {
         return service.update(faculty);
     }
     @GetMapping("bycolor")
-    public Collection<Faculty> getByColor(@RequestParam String color) {
-        return service.getBycolor(color);
+    public Collection<Faculty> getByColor(@RequestParam(required = false) String color, @RequestParam(required = false) String name) {
+        if (StringUtils.isEmpty(color) && !StringUtils.isEmpty(name)){
+            return service.getByColorAndName(color, name);
+        }
+        return service.getAll();
     }
 
 }

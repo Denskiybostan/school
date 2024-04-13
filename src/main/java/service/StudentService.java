@@ -32,7 +32,11 @@ public class StudentService {
                     .map(entity -> repository.save(student))
                     .orElse(null);
         }
-    public Collection<Student> getByAge(int age) {
-        return repository.findAllByAge(age);
+    public Collection<Student> getByAgeBetween(int max, int min) {
+        return repository.findAllByAgeBetween(min, max);
+    }
+
+    public Collection<Student> getAll() {
+        return repository.findAll();
     }
 }

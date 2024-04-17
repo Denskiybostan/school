@@ -32,7 +32,7 @@ public class FacultyController {
     public Faculty update(@RequestBody Faculty faculty) {
         return service.update(faculty);
     }
-    @GetMapping("bycolor")
+    @GetMapping("byColorAndName")
     public Collection<Faculty> getByColor(@RequestParam(required = false) String color, @RequestParam(required = false) String name) {
         if (StringUtils.isEmpty(color) && !StringUtils.isEmpty(name)){
             return service.getByColorAndName(color, name);

@@ -1,3 +1,5 @@
 select from Student;
 
-select from Faculty;
+select from faculty;
+select *
+from faculty where id = 1;

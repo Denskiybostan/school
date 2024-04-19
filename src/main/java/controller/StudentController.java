@@ -1,5 +1,6 @@
 package controller;
 
+import model.Faculty;
 import model.Student;
 import org.springframework.web.bind.annotation.*;
 import service.StudentService;
@@ -42,5 +43,9 @@ public class StudentController {
             return service.getByAgeBetween(min, max);
         }
         return service.getAll();
+    }
+    @GetMapping("faculty")
+    public Faculty getStudetFaculty(@RequestParam long studentId) {
+        return service.get(studentId).getFaculty();
     }
 }

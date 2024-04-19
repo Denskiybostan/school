@@ -1,10 +1,10 @@
 package model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +15,11 @@ public class Student {
 
     public String name;
     public int age;
+    @JoinColumn(name ="faculty_id")
+    @ManyToOne
+    @JsonBackReference
+    private Faculty faculty;
+
 
     public Student(Long id, String name, int age) {
         this.id = id;
@@ -44,6 +49,14 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 
     @Override

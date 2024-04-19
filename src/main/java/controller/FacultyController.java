@@ -39,5 +39,9 @@ public class FacultyController {
         }
         return service.getAll();
     }
+    @GetMapping("students")
+    public Faculty getStudetFaculty(@RequestParam long facultyId) {
+        return service.get(facultyId).getStudents();
+    }
 
 }

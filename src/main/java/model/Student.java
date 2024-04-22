@@ -14,6 +14,7 @@ public class Student {
     public Long id;
 
     public String name;
+    public String surname;
     public int age;
     @JoinColumn(name ="faculty_id")
     @ManyToOne
@@ -55,9 +56,18 @@ public class Student {
         return faculty;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
+
 
     @Override
     public boolean equals(Object o) {

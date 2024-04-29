@@ -1,12 +1,13 @@
 package controller;
 
 import model.Faculty;
-import org.springframework.stereotype.Service;
+import model.Student;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import service.FacultyService;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("faculty")
@@ -41,6 +42,10 @@ public class FacultyController {
     }
     @GetMapping("students")
     public Faculty getStudetFaculty(@RequestParam long facultyId) {
+        return service.get(facultyId).getStudents();
+    }
+    @GetMapping ("students")
+    public List<Student> getStudentsFaculty(@RequestParam long facultyId) {
         return service.get(facultyId).getStudents();
     }
 

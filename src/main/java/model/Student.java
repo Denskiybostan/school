@@ -16,9 +16,9 @@ public class Student {
     public String name;
     public String surname;
     public int age;
+
     @JoinColumn(name ="faculty_id")
     @ManyToOne
-    @JsonBackReference
     private Faculty faculty;
 
 
@@ -63,6 +63,7 @@ public class Student {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;

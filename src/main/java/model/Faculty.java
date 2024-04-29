@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,7 +15,9 @@ public class Faculty {
     private String name;
     private String color;
 
-    @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "faculty")
+    @JsonIgnore
     private List<Faculty> students;
 
     public Faculty(Long id, String name, String color) {

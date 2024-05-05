@@ -1,7 +1,9 @@
 package controller;
 
+import jakarta.persistence.Id;
 import model.Faculty;
 import model.Student;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.StudentService;
 
@@ -47,5 +49,18 @@ public class StudentController {
     @GetMapping("faculty")
     public Faculty getStudetFaculty(@RequestParam long studentId) {
         return service.get(studentId).getFaculty();
+    }
+
+    @GetMapping("/count")
+    public int getCountStudent(){
+        return service.getStudentCount();
+    }
+    @GetMapping("/avg-age")
+    public double getAvgAge(){
+        return service.getAvgAge();
+    }
+    @GetMapping("/count")
+    public Collection<Student> getLastStudent(){
+        return service.getLastFive();
     }
 }

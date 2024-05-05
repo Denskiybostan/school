@@ -2,20 +2,19 @@ package controller;
 
 import model.Faculty;
 import model.Student;
-import org.springframework.util.StringUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import service.FacultyService;
 
 import java.util.Collection;
 import java.util.List;
-
+@Service
 @RestController
 @RequestMapping("faculty")
 public class FacultyController {
-    private final FacultyService facultyService;
-
-    public FacultyController(FacultyService facultyService) {
-        this.facultyService = facultyService;
+    private final FacultyService service;
+    public FacultyController(FacultyService service) {
+        this.service = service;
     }
     @GetMapping
     public Faculty get (@RequestParam long id) {
@@ -35,14 +34,14 @@ public class FacultyController {
     }
     @GetMapping("byColorAndName")
     public Collection<Faculty> getByColor(@RequestParam(required = false) String color, @RequestParam(required = false) String name) {
-        if (StringUtils.isEmpty(color) && !StringUtils.isEmpty(name)){
-            return service.getByColorAndName(color, name);
+        if (color == null && name == null){
+            return service.getAll();
         }
-        return service.getAll();
+        return service.getBycolorOrName(color, name);
     }
     @GetMapping("students")
     public Faculty getStudetFaculty(@RequestParam long facultyId) {
-        return service.get(facultyId).getStudents();
+        return (Faculty) service.get(facultyId).getStudents();
     }
     @GetMapping ("students")
     public List<Student> getStudentsFaculty(@RequestParam long facultyId) {

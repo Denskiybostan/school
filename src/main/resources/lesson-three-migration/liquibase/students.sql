@@ -1,11 +1,11 @@
 -- liquibase formated sql
 
 -- changeset denis:1
-create table students(
+create index students(
     name text,
     surname text
 )
-create table faculty(
+create index faculty(
     name text,
     color text
 )

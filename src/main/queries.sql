@@ -16,3 +16,8 @@ create table student(
 create table student(
     set int default age(20)
 );
+insert  into faculty(color, name) values ('blue', 'harry');
+update student set faculty_id = 1;
+select s.name, s.age, f.name
+from student s
+join faculty f on f.id = s.faculty.id;

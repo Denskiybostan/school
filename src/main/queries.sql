@@ -1,6 +1,6 @@
 select surname from student;
 select * from student where age between 10 and 20;
-select * from student where name like '%O%';
+select name from student where name like '%O%';
 select name from student where name is not null;
 select * from student order by age;
 create table student(
@@ -21,3 +21,7 @@ update student set faculty_id = 1;
 select s.name, s.age, f.name
 from student s
 join faculty f on f.id = s.faculty.id;
+
+select *
+from student s join public.avatar a on student.id = a.student_id
+where a.student_id is not null;

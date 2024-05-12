@@ -1,11 +1,6 @@
 -- liquibase formated sql
 
 -- changeset denis:1
-create index students
-    on table_name text,
-    surname text
-)
-create index faculty
-    on table_name text,
-    color text
-)
+create index students on student (name);
+-- changeset denis:2
+create index faculty on faculty (name, color);

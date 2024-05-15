@@ -25,3 +25,6 @@ join faculty f on f.id = s.faculty.id;
 select *
 from student s join public.avatar a on student.id = a.student_id
 where a.student_id is not null;
+
+select *
+from databasechangelog;

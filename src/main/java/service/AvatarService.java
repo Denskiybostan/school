@@ -1,6 +1,8 @@
 package service;
 
+import jakarta.transaction.Transactional;
 import model.Avatar;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,11 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class AvatarService {
+    private final static Logger logger = (Logger) LoggerFactory.getLogger(AvatarService.class);
     private final AvatarRepository avatarRepository;
     private final StudentRepository studentRepository;
     private final Path avatarsDir;
@@ -26,6 +30,7 @@ public class AvatarService {
         this.avatarsDir = avatarsDir;
     }
     public void save(Long studentId, MultipartFile file) throws IOException {
+        logger.info("save avatar");
         Files.createDirectories(avatarsDir);
         var index = file.getName().lastIndexOf('.');
         var extension = file.getName().substring(index);
@@ -41,6 +46,7 @@ public class AvatarService {
         avatar.setStudent(studentRepository.getReferenceById(studentId));
         avatar.setFilePath(filePath.toString());
         avatarRepository.save(avatar);
+        logger.info("Avatar is saved! id = {}, path = {}");
     }
 
     public Avatar getFromDB(Long id) {

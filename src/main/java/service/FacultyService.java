@@ -26,7 +26,9 @@ public class FacultyService {
     }
 
     public Faculty get(long id) {
+        logger.info("faculty is getting");
         return repository.findById(id).orElseThrow(RecordNotFoundException::new);
+
     }
 
     public boolean delete(long id) {
@@ -38,12 +40,14 @@ public class FacultyService {
                 .orElse(false);
     }
     public Faculty update(Faculty faculty) {
+        logger.info("faculty is updating");
         return repository.findById(faculty.getId())
                 .map(entity -> repository.save(faculty))
                 .orElse(null);
     }
 
     public Collection<Faculty> getByColorAndName(String color, String name) {
+        logger.info("color and name is getting");
         return repository.findAllByColorOrNameIgnoreCase(color, name);
     }
 

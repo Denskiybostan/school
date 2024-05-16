@@ -5,7 +5,6 @@ import model.Faculty;
 import model.Student;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import repository.StudentRepository;
 
 import java.util.Collection;
@@ -25,8 +24,9 @@ public class StudentService {
         return studentRepository.save(student);
     }
     public Student get (long id) {
-        return studentRepository.findById(id).orElseThrow(RecordNotFoundException::new);
-    }
+        logger.info("getting student" + id);
+        return studentRepository.findById(id).orElseThrow(RecordNotFoundException::new);}
+
     public boolean delete (long id){
         return studentRepository.findById(id)
                 .map(entity -> {
@@ -36,6 +36,7 @@ public class StudentService {
                 .orElse(false);
     }
     public Student update (Student student) {
+        logger.info("student updating");
             return studentRepository.findById(student.getId())
                     .map(entity -> studentRepository.save(student))
                     .orElse(null);

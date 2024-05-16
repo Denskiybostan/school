@@ -3,12 +3,16 @@ package service;
 import exceptions.RecordNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import model.Faculty;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import repository.FacultyRepository;
 
 import java.util.Collection;
+import java.util.logging.Logger;
+
 @Service
 public class FacultyService {
+    private final static Logger logger = (Logger) LoggerFactory.getLogger(FacultyService.class);
     private final FacultyRepository repository;
 
 
@@ -17,6 +21,7 @@ public class FacultyService {
     }
 
     public Faculty add(Faculty faculty) {
+        logger.info("Was invoked method create faculty");
         return repository.save(faculty);
     }
 

@@ -3,19 +3,25 @@ package service;
 import exceptions.RecordNotFoundException;
 import model.Faculty;
 import model.Student;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import repository.StudentRepository;
 
 import java.util.Collection;
+import java.util.logging.Logger;
+
 @Service
 public class StudentService {
+    private final static Logger logger = (Logger) LoggerFactory.getLogger(StudentService.class);
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
     private final StudentRepository studentRepository;
     public Student add (Student student) {
+        logger.info("Was invoked method create student");
+
         return studentRepository.save(student);
     }
     public Student get (long id) {

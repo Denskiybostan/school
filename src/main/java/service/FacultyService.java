@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import repository.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 @Service
@@ -53,5 +55,12 @@ public class FacultyService {
 
     public Collection<Faculty> getAll() {
         return repository.findAll();
+    }
+
+    public String getLongerName() {
+        return  repository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparing(String::length))
+                .orElse("");
     }
 }

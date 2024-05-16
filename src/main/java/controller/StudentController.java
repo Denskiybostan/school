@@ -59,8 +59,18 @@ public class StudentController {
     public double getAvgAge(){
         return service.getAvgAge();
     }
-    @GetMapping("/count")
+    @GetMapping("/last")
     public Collection<Student> getLastStudent(){
         return service.getLastFive();
     }
+
+    @GetMapping("/medium-age-stream")
+    public double getMediumAgeStream() {
+        return service.gegMediumAge();
+    }
+    @GetMapping("/nameStartsA")
+    public Collection<String> getNameStudentStartsA(){
+        return service.getNameStartsWithA();
+    }
+
 }

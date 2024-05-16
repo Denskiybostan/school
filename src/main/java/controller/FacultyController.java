@@ -2,6 +2,7 @@ package controller;
 
 import model.Faculty;
 import model.Student;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import service.FacultyService;
@@ -12,40 +13,41 @@ import java.util.List;
 @RestController
 @RequestMapping("faculty")
 public class FacultyController {
-    private final FacultyService service;
+    private final FacultyService facultyService;
     public FacultyController(FacultyService service) {
-        this.service = service;
-    }
-    @GetMapping
-    public Faculty get (@RequestParam long id) {
-        return service.add(faculty);
+        this.facultyService = service;
     }
     @PostMapping
     public Faculty add(@RequestBody Faculty faculty) {
-        return service.add(faculty);
+        return facultyService.add(faculty);
     }
     @DeleteMapping
     public boolean delete(@RequestParam long id) {
-        return service.delete(id);
+        return facultyService.delete(id);
     }
     @GetMapping
     public Faculty update(@RequestBody Faculty faculty) {
-        return service.update(faculty);
+        return facultyService.update(faculty);
     }
     @GetMapping("byColorAndName")
     public Collection<Faculty> getByColor(@RequestParam(required = false) String color, @RequestParam(required = false) String name) {
         if (color == null && name == null){
-            return service.getAll();
+            return facultyService.getAll();
         }
-        return service.getBycolorOrName(color, name);
+        return facultyService.getByColorAndName(color, name);
     }
     @GetMapping("students")
     public Faculty getStudetFaculty(@RequestParam long facultyId) {
-        return (Faculty) service.get(facultyId).getStudents();
+        return (Faculty)facultyService.get(facultyId).getStudents();
     }
     @GetMapping ("students")
-    public List<Student> getStudentsFaculty(@RequestParam long facultyId) {
-        return service.get(facultyId).getStudents();
+    public List<Faculty> getStudentsFaculty(@RequestParam long facultyId) {
+        return facultyService.get(facultyId).getStudents();
     }
+    @GetMapping("/longerName")
+    public String getLongerName() {
+        return facultyService.getLongerName();
+    }
+
 
 }

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
+
     private final static Logger logger = (Logger) LoggerFactory.getLogger(StudentService.class);
 
     public StudentService(StudentRepository studentRepository) {
@@ -82,4 +83,46 @@ public class StudentService {
                 .orElse(0);
     }
 
+    public void printParallel() {
+        var students = studentRepository.findAll();
+        logger.info(students.get(0).toString());
+        logger.info(students.get(1).toString());
+        new  Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            }catch (InterruptedException e){
+                throw new RuntimeException(e);
+            }
+            logger.info(students.get(2).toString());
+            logger.info(students.get(3).toString());
+        }).start();
+        new  Thread(() -> {
+            logger.info(students.get(4).toString());
+            logger.info(students.get(5).toString());
+        }).start();
+    }
+    public void printSync() {
+        var students = studentRepository.findAll();
+        print(students.get(0));
+        print(students.get(1));
+        new  Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            }catch (InterruptedException e){
+                throw new RuntimeException(e);
+            }
+            print(students.get(2));
+            print(students.get(3).toString());
+        }).start();
+        new  Thread(() -> {
+            print(students.get(4));
+            print(students.get(5));
+        }).start();
+
+    }
+    private  void print(Object o) {
+        synchronized (this) {
+            logger.info(o.toString());
+        }
+    }
 }

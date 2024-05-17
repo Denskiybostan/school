@@ -72,5 +72,13 @@ public class StudentController {
     public Collection<String> getNameStudentStartsA(){
         return service.getNameStartsWithA();
     }
+    @GetMapping("/print-parallel")
+    public void printParallel() {
+        service.printParallel();
+    }
+    @GetMapping("/print-parallel")
+    public void printSync() {
+        service.printSync();
+    }
 
 }

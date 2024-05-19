@@ -1,7 +1,9 @@
 package controller;
 
+import com.google.common.base.Stopwatch;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +30,14 @@ public class InfoController {
         int sum = IntStream.iterate(1, a -> a + 1).limit(1_000_000).sum();
         var end = System.currentTimeMillis() - start;
         logger.info("Elapsed time:{}" + end);
+        return sum;
+    }
+
+    @GetMapping("/sum2")
+    public int sum2() {
+        var st = Stopwatch.createStarted();
+        int sum = IntStream.iterate(1, a -> a + 1).limit(1_000_000).sum();
+        logger.info("Elapsed time:{}" + st);
         return sum;
     }
 }
